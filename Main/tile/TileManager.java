@@ -15,7 +15,7 @@ public class TileManager {
     public TileManager(GamePanel gp) {
         this.gp = gp;
 
-        tile = new tile[10]; //este número depende de la cantidad de tiles que tengamos
+        tile = new Tile[10]; //este número depende de la cantidad de tiles que tengamos
       
         getTileImage();
 
@@ -25,13 +25,13 @@ public class TileManager {
         try {
      
     
-        tile[0] = new tile();
+        tile[0] = new Tile();
         tile[0].image = ImageIO.read(getClass().getResourceAsStream("/Res/tiles/001.png"));
 
-        tile[1] = new tile();
+        tile[1] = new Tile();
         tile[1].image = ImageIO.read(getClass().getResourceAsStream("/Res/tiles/002.png"));
         
-        tile[2] = new tile();
+        tile[2] = new Tile();
         tile[2].image = ImageIO.read(getClass().getResourceAsStream("/Res/tiles/003.png")); 
         
 
