@@ -1,5 +1,6 @@
 package Main;
 
+import Main.tile.TileManager;
 import entity.Player;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -18,7 +19,9 @@ public class GamePanel extends JPanel implements Runnable {
 
     //FPS
     int FPS = 60;
-
+    
+    TileManager tileM = new TileManager(this);
+    
     Thread gameThread;
     
     KeyHandler keyH = new KeyHandler();
@@ -80,7 +83,7 @@ public class GamePanel extends JPanel implements Runnable {
         super.paintComponent(g);
      
         java.awt.Graphics2D g2 = (java.awt.Graphics2D)g;
-        
+        tileM.draw(g2); //esto son como capas, primero se dibujan los tiles
         player.draw(g2);
         
         g2.dispose();

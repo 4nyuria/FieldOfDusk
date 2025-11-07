@@ -31,42 +31,21 @@ public class TileManager {
     
         tile[0] = new tile();
         tile[0].image = ImageIO.read(getClass().getResourceAsStream("/Res/tiles/001.png"));
-        if (tile[0].image == null) System.out.println("⚠️ No se encontró 000.png");
+
         tile[1] = new tile();
         tile[1].image = ImageIO.read(getClass().getResourceAsStream("/Res/tiles/002.png"));
-        if (tile[0].image == null) System.out.println("⚠️ No se encontró 001.png");
+        
         tile[2] = new tile();
         tile[2].image = ImageIO.read(getClass().getResourceAsStream("/Res/tiles/003.png")); 
-        if (tile[0].image == null) System.out.println("⚠️ No se encontró 002.png");
-        tile[1].collision = true;
+        
 
         //Cargar más tiles según sea necesario
     } catch (IOException e) {
         e.printStackTrace();
     }
+
     public void draw(Graphics2D g2) {
-        int worldCol = 0;
-        int worldRow = 0;
-        int x =0;//lo uso porque sale en el video xdd
-        int y =0;// lo mismo con este
-        
-        while (worldCol < gp.maxWorldCol && worldRow < gp.maxWorldRow) {
-            int tileNum = mapTileNum[worldCol][worldRow];
-            
-            int worldX = worldCol * gp.tileSize;
-            int worldY = worldRow * gp.tileSize;
-          
-            g2.drawImage(tile[tileNum].image, worldX, worldY, gp.tileSize, gp.tileSize, null);
-            
-            worldCol++;
-            
-            if (worldCol == gp.maxWorldCol) {
-                worldCol = 0;
-                x=0;
-                worldRow++;
-                y += gp.tileSize;
-            }
-        }
+        g2.drawImage(tile[0].image, 0, 0, gp.tileSize, gp.tileSize, null);
     }
 
 }
