@@ -19,12 +19,12 @@ public class GamePanel extends JPanel implements Runnable {
     // Mapa del mundo (lo usa TileManager)
     public int[][] mapTileNum;
 
-    // Referencia al TileManager
-    public Main.tile.TileManager tileM;
+
     //FPS
     int FPS = 60;
     
-    TileManager tileM = new TileManager(this);
+    // Referencia al TileManager
+    public TileManager tileM = new TileManager(this);
     
     Thread gameThread;
     
