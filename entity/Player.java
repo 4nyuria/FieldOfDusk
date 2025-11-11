@@ -22,14 +22,15 @@ public Player(GamePanel gp, KeyHandler keyH) {
 
 
 }
-public void setDefaultValues() {
+public final void setDefaultValues() {
         x = 100;
         y = 100;
         speed = 4;
         direction = "down";
 }
 
-public void getPlayerImage() {
+@SuppressWarnings("CallToPrintStackTrace")
+public final void getPlayerImage() {
         
         try {
             up1 = ImageIO.read(getClass().getResourceAsStream("/Res/player/boy_up_1.png"));
@@ -88,38 +89,38 @@ public void draw(Graphics2D g2) {
         BufferedImage image = null;
 
         switch(direction) {
-                case "up":
-                        if (spriteNum == 1) {
-                                image = up1;
-                        }
-                        if (spriteNum == 2) {
-                                image = up2;
-                        }
-                        break;
-                case "down":
-                        if (spriteNum == 1) {
-                                image = down1;
-                        }
-                        if (spriteNum == 2) {
-                                image = down2;
-                        }
-                        break;
-                case "left":
-                        if (spriteNum == 1) {   
+                case "up" -> {
+                    if (spriteNum == 1) {
+                        image = up1;
+                    }
+                    if (spriteNum == 2) {
+                        image = up2;
+                    }
+        }
+                case "down" -> {
+                    if (spriteNum == 1) {
+                        image = down1;
+                    }
+                    if (spriteNum == 2) {
+                        image = down2;
+                    }
+        }
+                case "left" -> {
+                    if (spriteNum == 1) {   
                         image = left1;
-                        }
-                        if (spriteNum == 2) {   
+                    }
+                    if (spriteNum == 2) {   
                         image = left2;
-                        }
-                        break;
-                case "right":
-                        if (spriteNum == 1) {
+                    }
+        }
+                case "right" -> {
+                    if (spriteNum == 1) {
                         image = right1;
-                        }
-                        if (spriteNum == 2) {
+                    }
+                    if (spriteNum == 2) {
                         image = right2;
-                        }
-                        break;
+                    }
+        }
         }
         g2.drawImage(image, x, y, gp.tileSize, gp.tileSize, null);
 }

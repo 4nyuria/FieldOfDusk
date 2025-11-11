@@ -11,11 +11,11 @@ public class GamePanel extends JPanel implements Runnable {
     final int originalTileSize = 16; //16x16 tile
     final int scale = 3;
     
-    public int tileSize = originalTileSize * scale; //48x48 tile
-    public int maxScreenCol = 16;
-    public int maxScreenRow = 12;
-    public int screenWidth = tileSize * maxScreenCol; // 768 pixels
-    public int screenHeight = tileSize * maxScreenRow; // 576 pixels
+    public final int tileSize = originalTileSize * scale; //48x48 tile
+    public final int maxScreenCol = 16;
+    public final int maxScreenRow = 12;
+    public final int screenWidth = tileSize * maxScreenCol; // 768 pixels
+    public final int screenHeight = tileSize * maxScreenRow; // 576 pixels
     // Mapa del mundo (lo usa TileManager)
     public int[][] mapTileNum;
 
@@ -83,6 +83,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     }
   
+    @Override
     public void paintComponent(java.awt.Graphics g) {
         super.paintComponent(g);
      
