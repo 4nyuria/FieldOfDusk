@@ -16,10 +16,10 @@ public class TileManager {
     public TileManager(GamePanel gp) {
         this.gp = gp;
 
-        tile = new Tile[37]; //este número depende de la cantidad de tiles que tengamos
+        tile = new Tile[38]; //este número depende de la cantidad de tiles que tengamos
         mapTileNum = new int[gp.maxScreenCol][gp.maxScreenRow];
         getTileImage();
-        loadMap("/Res/maps/map01.txt");
+        loadMap("/Res/maps/worldmap.txt");
 
 
     }
