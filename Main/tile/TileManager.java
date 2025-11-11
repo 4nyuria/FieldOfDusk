@@ -19,7 +19,7 @@ public class TileManager {
         tile = new Tile[37]; //este número depende de la cantidad de tiles que tengamos
         mapTileNum = new int[gp.maxScreenCol][gp.maxScreenRow];
         getTileImage();
-        loadMap();
+        loadMap("/Res/maps/map01.txt");
 
 
     }
@@ -53,13 +53,18 @@ public class TileManager {
     }
     
     @SuppressWarnings({"CallToPrintStackTrace", "UseSpecificCatch"})
-    public void loadMap() {
+    public void loadMap(String filePath) {
         BufferedReader br = null;
         try {
             // Aca cargaríamos el mapa desde un archivo de texto o similar
-            InputStream is = getClass().getResourceAsStream("/Res/maps/map01.txt");
+            InputStream is = getClass().getResourceAsStream(filePath);
             br = new BufferedReader(new InputStreamReader(is));
            
+             if (is == null) {
+            System.err.println("Mapa no encontrado: " + filePath);
+            return;
+            }
+
             int col = 0;
             int row = 0;
             
