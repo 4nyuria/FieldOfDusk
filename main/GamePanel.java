@@ -1,6 +1,6 @@
 package main;
 
-import Main.tile.TileManager;
+import main.tile.TileManager;
 import entity.Player;
 import java.awt.Color;
 import java.awt.Dimension;
