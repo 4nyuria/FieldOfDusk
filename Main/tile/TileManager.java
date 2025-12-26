@@ -224,7 +224,7 @@ public class TileManager {
 
            worldCol++;
 
-           if (worldCol == gp.maxScreenCol) {
+           if (worldCol == gp.maxWorldCol) {
                worldCol = 0;
                worldRow++;
            }
