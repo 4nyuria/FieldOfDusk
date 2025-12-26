@@ -176,7 +176,7 @@ public class TileManager {
                     String numbers[] = line.split(" ");
                   
                     int num = Integer.parseInt(numbers[col]);
-                    mapTileNum[col][row] = num;
+                    mapTileNum[row][col] = num;
                     col++;
                 } 
                 if (col == gp.maxWorldCol) {
@@ -205,7 +205,7 @@ public class TileManager {
        while (worldCol < gp.maxWorldCol && worldRow < gp.maxWorldRow) {
         //esto es para el mapeo numerico del mapa
        
-         int tileNum = mapTileNum[worldCol][worldRow];
+         int tileNum = mapTileNum[worldRow][worldCol];
 
          int worldX = worldCol * gp.tileSize;
          int worldY = worldRow * gp.tileSize;
