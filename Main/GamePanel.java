@@ -32,7 +32,11 @@ public class GamePanel extends JPanel implements Runnable {
     public TileManager tileM = new TileManager(this);
     
     Thread gameThread;
-    
+    //sobre la coalision
+    public CollisionChecker cChecker = new CollisionChecker(this);
+    //player
+
+
     KeyHandler keyH = new KeyHandler();
     public Player player = new Player(this, keyH);
 

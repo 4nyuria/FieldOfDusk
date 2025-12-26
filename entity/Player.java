@@ -3,6 +3,7 @@ package entity;
 import Main.GamePanel;
 import Main.KeyHandler;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -22,6 +23,13 @@ public Player(GamePanel gp, KeyHandler keyH) {
         screenX = gp.screenWidth / 2 - (gp.tileSize / 2);
         screenY = gp.screenHeight / 2 - (gp.tileSize / 2);      
        
+        //para que el character no sea todo coalisionable
+        solidArea = new Rectangle();
+        solidArea.x = 8;
+        solidArea.y = 16;
+        solidArea.width = 32;
+        solidArea.height = 32;
+
         setDefaultValues();
         getPlayerImage();
 
@@ -61,19 +69,15 @@ public void update() {
         
                  if(keyH.upPressed == true) {
                 direction = "up";
-                worldY -= speed;
         }
         else if(keyH.downPressed == true) {
                 direction = "down";
-                worldY += speed;
         }
         else if(keyH.leftPressed == true) {
                 direction = "left";
-                worldX -= speed;
         }
         else if(keyH.rightPressed == true) {
                 direction = "right";
-                worldX += speed;
         }
         spriteCounter++;
         if (spriteCounter > 15) {
@@ -88,7 +92,17 @@ public void update() {
 
         }
 
-       
+        collisionOn = false;
+        gp.cChecker.checkTile(this);
+       // if collision is false, player can move
+       if (collisionOn == false) {
+           switch(direction) {
+               case "up": worldY -= speed;  break;
+               case "down": worldY += speed; break;
+               case "left": worldX -= speed; break;
+               case "right": worldX += speed; break;
+           }
+       }
 }
 public void draw(Graphics2D g2) {
         BufferedImage image = null;

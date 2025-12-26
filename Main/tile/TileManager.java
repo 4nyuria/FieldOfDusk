@@ -10,8 +10,8 @@ import javax.imageio.ImageIO;
 
 public class TileManager {
     GamePanel gp;
-    Tile[] tile;
-    int mapTileNum[][];
+    public Tile[] tile;
+    public int mapTileNum[][];
     @SuppressWarnings("OverridableMethodCallInConstructor")
     public TileManager(GamePanel gp) {
         this.gp = gp;
@@ -145,7 +145,6 @@ public class TileManager {
         tile[35] = new Tile();
         tile[35].image = ImageIO.read(getClass().getResourceAsStream("/Res/tiles/035.png"));
         tile[35].collision = true;
-        
         tile[36] = new Tile();
         tile[36].image = ImageIO.read(getClass().getResourceAsStream("/Res/tiles/036.png"));
         
