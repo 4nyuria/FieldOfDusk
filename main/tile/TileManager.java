@@ -17,7 +17,7 @@ public class TileManager {
         this.gp = gp;
 
         tile = new Tile[38]; //este número depende de la cantidad de tiles que tengamos
-        mapTileNum = new int[gp.maxWorldRow][gp.maxWorldCol];
+        mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
         getTileImage();
         loadMap("/Res/maps/worldmap.txt");
 
@@ -180,7 +180,7 @@ public class TileManager {
                     String numbers[] = line.split(" ");
                   
                     int num = Integer.parseInt(numbers[col]);
-                    mapTileNum[row][col] = num;
+                    mapTileNum[col][row] = num;
                     col++;
                 } 
                 if (col == gp.maxWorldCol) {
@@ -209,7 +209,7 @@ public class TileManager {
        while (worldCol < gp.maxWorldCol && worldRow < gp.maxWorldRow) {
         //esto es para el mapeo numerico del mapa
        
-         int tileNum = mapTileNum[worldRow][worldCol];
+         int tileNum = mapTileNum[worldCol][worldRow];
 
          int worldX = worldCol * gp.tileSize;
          int worldY = worldRow * gp.tileSize;

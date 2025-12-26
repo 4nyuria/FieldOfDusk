@@ -32,6 +32,7 @@ public class CollisionChecker {
                 if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
                     entity.collisionOn = true;
                 }
+                 break;
             }
             case "down" ->  {
                 entityBottomRow = (entityBottomWorldY + entity.speed) / gp.tileSize;
@@ -40,6 +41,7 @@ public class CollisionChecker {
                 if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
                     entity.collisionOn = true;
                 }
+                 break;
             }
             case "left" ->  {
                 entityLeftCol = (entityLeftWorldX - entity.speed) / gp.tileSize;
@@ -48,6 +50,7 @@ public class CollisionChecker {
                 if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
                     entity.collisionOn = true;
                 }
+                 break;
             }
             case "right" -> {
                 entityRightCol = (entityRightWorldX + entity.speed) / gp.tileSize;
@@ -56,6 +59,7 @@ public class CollisionChecker {
                 if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
                     entity.collisionOn = true;
                 }
+                break;
             }
             }
     }

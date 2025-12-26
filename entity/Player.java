@@ -1,12 +1,12 @@
 package entity;
 
-import main.GamePanel;
-import main.KeyHandler;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import main.GamePanel;
+import main.KeyHandler;
 
 public class Player extends Entity {
 
@@ -79,6 +79,8 @@ public void update() {
         else if(keyH.rightPressed == true) {
                 direction = "right";
         }
+        
+        
         spriteCounter++;
         if (spriteCounter > 15) {
                 if (spriteNum == 1) {
@@ -96,15 +98,22 @@ public void update() {
         gp.cChecker.checkTile(this);
        // if collision is false, player can move
        if (collisionOn == false) {
-           switch (direction) {
-               case "up": worldY -= speed;
-               case "down": worldY += speed;
-               case "left": worldX -= speed;
-               case "right": worldX += speed;
-           }
-       }
-}
-public void draw(Graphics2D g2) {
+           if (keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed) {
+                 switch(direction) {
+                        case "up": worldY -= speed;
+                        break;
+                        case "down": worldY += speed;
+                        break;
+                        case "left": worldX -= speed;
+                        break;
+                        case "right": worldX += speed;
+                        break;
+                }
+            }
+        }
+    }
+
+    public void draw(Graphics2D g2) {
         BufferedImage image = null;
 
         switch(direction) {
