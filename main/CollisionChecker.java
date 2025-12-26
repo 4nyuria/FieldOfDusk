@@ -1,7 +1,6 @@
 package main;
 
 import entity.Entity;
-
 public class CollisionChecker {
     
     GamePanel gp;
@@ -29,9 +28,10 @@ public class CollisionChecker {
                 entityTopRow = (entityTopWorldY - entity.speed) / gp.tileSize;
                 tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
                 tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
-                if (gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true) {
+                if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
                     entity.collisionOn = true;
                 }
+                break;
             }
             case "down": {
                 entityBottomRow = (entityBottomWorldY + entity.speed) / gp.tileSize;
@@ -40,6 +40,7 @@ public class CollisionChecker {
                 if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
                     entity.collisionOn = true;
                 }
+                break;
             }
             case "left": {
                 entityLeftCol = (entityLeftWorldX - entity.speed) / gp.tileSize;
@@ -48,6 +49,7 @@ public class CollisionChecker {
                 if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
                     entity.collisionOn = true;
                 }
+                break;
             }
             case "right":{
                 entityRightCol = (entityRightWorldX + entity.speed) / gp.tileSize;
@@ -56,6 +58,7 @@ public class CollisionChecker {
                 if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
                     entity.collisionOn = true;
                 }
+                break;
             }
             }
     }

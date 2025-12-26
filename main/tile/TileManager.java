@@ -17,15 +17,13 @@ public class TileManager {
         this.gp = gp;
 
         tile = new Tile[38]; //este número depende de la cantidad de tiles que tengamos
-        mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
+        mapTileNum = new int[gp.maxWorldRow][gp.maxWorldCol];
         getTileImage();
         loadMap("/Res/maps/worldmap.txt");
 
 
     }
 
-    public TileManager() {
-    }
     @SuppressWarnings("CallToPrintStackTrace")
     public void getTileImage() { //cargar las imágenes de los tiles
         try {
