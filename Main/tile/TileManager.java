@@ -1,11 +1,12 @@
 package Main.tile;
-import Main.GamePanel;
 import java.awt.Graphics2D;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import javax.imageio.ImageIO;
+
+import Main.GamePanel;
 
 
 public class TileManager {

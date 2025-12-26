@@ -96,11 +96,11 @@ public void update() {
         gp.cChecker.checkTile(this);
        // if collision is false, player can move
        if (collisionOn == false) {
-           switch(direction) {
-               case "up": worldY -= speed;  break;
-               case "down": worldY += speed; break;
-               case "left": worldX -= speed; break;
-               case "right": worldX += speed; break;
+           switch (direction) {
+               case "up": worldY -= speed;
+               case "down": worldY += speed;
+               case "left": worldX -= speed;
+               case "right": worldX += speed;
            }
        }
 }
