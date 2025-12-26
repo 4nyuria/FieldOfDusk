@@ -1,4 +1,4 @@
-package Main;
+package main;
 
 import Main.tile.TileManager;
 import entity.Player;

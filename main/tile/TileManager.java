@@ -1,4 +1,4 @@
-package Main.tile;
+package main.tile;
 import java.awt.Graphics2D;
 import java.io.BufferedReader;
 import java.io.IOException;
