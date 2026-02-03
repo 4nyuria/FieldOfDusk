@@ -14,8 +14,8 @@ public class GamePanel extends JPanel implements Runnable {
     public final int tileSize = originalTileSize * scale; //48x48 tile
     public final int maxScreenCol = 16;
     public final int maxScreenRow = 12;
-    public final int screenWidth = tileSize * maxScreenCol; // 768 pixels
-    public final int screenHeight = tileSize * maxScreenRow; // 576 pixels
+    public final int screenWidth = tileSize * maxScreenCol; 
+    public final int screenHeight = tileSize * maxScreenRow; 
     // Mapa del mundo (lo usa TileManager)
     public int[][] mapTileNum;
 
@@ -38,7 +38,11 @@ public class GamePanel extends JPanel implements Runnable {
 
     KeyHandler keyH = new KeyHandler();
     public Player player = new Player(this, keyH);
-
+    
+    int playerposX;
+	int playerSpeed;
+	int playerposY;
+    
     public GamePanel() {
       
          this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -88,6 +92,37 @@ public class GamePanel extends JPanel implements Runnable {
     public void update() {
 
         player.update();
+        //despues revisar si esto no funciona y sacarlo wewe
+      //Straight Movement
+        if(keyH.upPressed &! (keyH.leftPressed || keyH.rightPressed)) {
+            playerposY -= playerSpeed;
+        }
+        else if(keyH.downPressed &! (keyH.leftPressed || keyH.rightPressed)) {
+            playerposY += playerSpeed;
+        }
+        else if(keyH.leftPressed &! (keyH.upPressed || keyH.downPressed)) {
+            playerposX -= playerSpeed;
+        }
+        else if(keyH.rightPressed &! (keyH.upPressed || keyH.downPressed)) {
+            playerposX += playerSpeed;
+        }
+		//diagonal movement
+        if(keyH.upPressed && keyH.rightPressed) {
+            playerposX += playerSpeed;
+            playerposY -= playerSpeed;
+        } 
+        else if(keyH.upPressed && keyH.leftPressed) {
+            playerposX -= playerSpeed;
+            playerposY -= playerSpeed;
+        }
+        else if(keyH.downPressed && keyH.rightPressed) {
+            playerposX += playerSpeed;
+            playerposY += playerSpeed;
+        }
+        else if(keyH.downPressed && keyH.leftPressed) {
+            playerposX -= playerSpeed;
+            playerposY += playerSpeed;
+        }
 
     }
   
