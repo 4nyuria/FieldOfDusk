@@ -12,6 +12,7 @@ public class TileManager {
     GamePanel gp;
     public Tile[] tile;
     public int mapTileNum[][];
+    
     @SuppressWarnings("OverridableMethodCallInConstructor")
     public TileManager(GamePanel gp) {
         this.gp = gp;
@@ -26,7 +27,7 @@ public class TileManager {
 
     @SuppressWarnings("CallToPrintStackTrace")
     public void getTileImage() { //cargar las imágenes de los tiles
-        try {
+    	try {
      
     
         tile[0] = new Tile();
@@ -154,7 +155,8 @@ public class TileManager {
           e.printStackTrace();
         }
     }
-    
+
+    	
     @SuppressWarnings({"CallToPrintStackTrace", "UseSpecificCatch"})
     public void loadMap(String filePath) {
         BufferedReader br = null;
