@@ -1,2 +1,3 @@
 # FieldOfDusk
-Practicando Java... si otra vez we
+RPG action game
+Learning from RyiSnow's tutorial
