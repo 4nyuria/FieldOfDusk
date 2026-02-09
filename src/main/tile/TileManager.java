@@ -55,15 +55,21 @@ public class TileManager {
         	String maxTile[] = line2.split(" ");
         	
         	gp.maxWorldCol = maxTile.length;
+        	gp.maxWorldRow = maxTile.length;
+            mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
         	
-        	
+            br.close();
+            
         }catch(IOException e) {
         	System.out.println("Exception!*");
         }
         
-        mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
+        loadMap("/mpas/sample.txt",0);
+
        
+       /*Esto leía el mapa al inicio
         loadMap("/Res/maps/worldmap.txt"); //acá lee el mapa <-------
+        */
     }
     public void getTileImage( ) {
     	for(int i =0; i < fileNames.size(); i++) {
@@ -83,21 +89,18 @@ public class TileManager {
     	}
     }
 /*
- Esto de abajo, es para cargar las tile 1x1, pero es preferible usarla al inicio como
+ Esto es para cargar las tile 1x1, pero es preferible usarla al inicio como
  para ver si el codigo funciona, ya despues hay que utilizar un bucle
     @SuppressWarnings("CallToPrintStackTrace")
     public void getTileImage() { //cargar las imágenes de los tiles, reemplazado por array
     	try {
-     
-    
         tile[0] = new Tile();
         tile[0].image = ImageIO.read(getClass().getResourceAsStream("/Res/tiles/000.png"));
         tile[0].collision = true;
 
         tile[1] = new Tile();
         tile[1].image = ImageIO.read(getClass().getResourceAsStream("/Res/tiles/001.png"));
-     
-        //Cargar más tiles según sea necesario
+
          } catch (IOException e) {
           e.printStackTrace();
         }
