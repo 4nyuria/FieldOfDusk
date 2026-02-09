@@ -24,7 +24,7 @@ public class TileManager {
     public TileManager(GamePanel gp) {
         this.gp = gp;
         // Para leer TILE DATA FILE - a esto debo cambiarle la ruta después para que quede ordenado
-        InputStream is = getClass().getResourceAsStream("src/maps/tiledata.txt"); //aun no tengo el tiledata
+        InputStream is = getClass().getResourceAsStream("/maps/tiledata.txt"); 
         BufferedReader br = new BufferedReader(new InputStreamReader(is)); 
         
         //para sacar el nombre de las tiles y las coalisiones desde el archivo
@@ -47,7 +47,7 @@ public class TileManager {
          */
         getTileImage();
         // para maxWorldCol & Row
-        is = getClass ().getResourceAsStream("src/maps/mapexample.txt");
+        is = getClass ().getResourceAsStream("/maps/mapexample.txt");
         br = new BufferedReader (new InputStreamReader(is));
         
         try {
@@ -108,12 +108,12 @@ public class TileManager {
 
 */    	
     public void setup(int index, String imageName, boolean collision) {
-    	//UtilityTool uTool = new UtilityTool(); en el capitulo 47 sacar el comentado
+    	UtilityTool uTool = new UtilityTool(); 
     	
     	try {
     		tile[index] = new Tile();
-    		tile[index].image = ImageIO.read(getClass().getResourceAsStream("/tile/"+ imageName));
-    		//tile[index].image = uTool.scaleImage(tile[index].image, gp.tileSize, gp.tileSize); sacar comentario en cap 47
+    		tile[index].image = ImageIO.read(getClass().getResourceAsStream("/Res.tiles/"+ imageName));
+    		tile[index].image = uTool.scaleImage(tile[index].image, gp.tileSize, gp.tileSize); 
     		tile[index].collision = collision;
     		
     		}catch(IOException e) {
