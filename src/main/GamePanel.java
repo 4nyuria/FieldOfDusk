@@ -98,8 +98,7 @@ public class GamePanel extends JPanel implements Runnable {
     public void update() {
 
         player.update();
-        //despues revisar si esto no funciona y sacarlo wewe
-      //Straight Movement
+        //Straight Movement
         if(keyH.upPressed &! (keyH.leftPressed || keyH.rightPressed)) {
             playerposY -= playerSpeed;
         }
@@ -112,24 +111,8 @@ public class GamePanel extends JPanel implements Runnable {
         else if(keyH.rightPressed &! (keyH.upPressed || keyH.downPressed)) {
             playerposX += playerSpeed;
         }
-		//diagonal movement
-        if(keyH.upPressed && keyH.rightPressed) {
-            playerposX += playerSpeed;
-            playerposY -= playerSpeed;
-        } 
-        else if(keyH.upPressed && keyH.leftPressed) {
-            playerposX -= playerSpeed;
-            playerposY -= playerSpeed;
-        }
-        else if(keyH.downPressed && keyH.rightPressed) {
-            playerposX += playerSpeed;
-            playerposY += playerSpeed;
-        }
-        else if(keyH.downPressed && keyH.leftPressed) {
-            playerposX -= playerSpeed;
-            playerposY += playerSpeed;
-        }
-
+            
+		
     }
   
     @Override

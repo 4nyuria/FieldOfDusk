@@ -37,8 +37,8 @@ public Player(GamePanel gp, KeyHandler keyH) {
 }
 public final void setDefaultValues() {
 	//posicion inicial del player
-        worldX = gp.tileSize * 58;
-        worldY = gp.tileSize * 47;
+        worldX = gp.tileSize * 15;
+        worldY = gp.tileSize * 15;
         speed = 4;
         direction = "down";
 }
