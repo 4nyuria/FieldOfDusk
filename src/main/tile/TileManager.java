@@ -24,7 +24,7 @@ public class TileManager {
     public TileManager(GamePanel gp) {
         this.gp = gp;
         // Para leer TILE DATA FILE - a esto debo cambiarle la ruta después para que quede ordenado
-        InputStream is = getClass().getResourceAsStream("/maps/tiledata.txt"); //aun no tengo el tiledata
+        InputStream is = getClass().getResourceAsStream("src/maps/tiledata.txt"); //aun no tengo el tiledata
         BufferedReader br = new BufferedReader(new InputStreamReader(is)); 
         
         //para sacar el nombre de las tiles y las coalisiones desde el archivo
@@ -47,7 +47,7 @@ public class TileManager {
          */
         getTileImage();
         // para maxWorldCol & Row
-        is = getClass ().getResourceAsStream("/maps/sample.txt");
+        is = getClass ().getResourceAsStream("src/maps/mapexample.txt");
         br = new BufferedReader (new InputStreamReader(is));
         
         try {
@@ -64,7 +64,7 @@ public class TileManager {
         	System.out.println("Exception!*");
         }
         
-        loadMap("/maps/sample.txt",0);
+        loadMap("/maps/mapexample.txt",0);
 
        
        /*Esto leía el mapa al inicio
