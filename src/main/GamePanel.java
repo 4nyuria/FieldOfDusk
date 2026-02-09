@@ -20,8 +20,12 @@ public class GamePanel extends JPanel implements Runnable {
     public int[][] mapTileNum;
 
     //world settings
-    public final int maxWorldCol = 50;
-    public final int maxWorldRow = 50;
+    /*al incio cold y row tienen valores fijos y es una public final
+    luego del bucle y array se eliminan valores y se saca final
+    */
+    public int maxWorldCol;
+    public int maxWorldRow;
+    
     public final int worldWidth = tileSize * maxWorldCol;           
     public final int worldHeight = tileSize * maxWorldRow;
 
