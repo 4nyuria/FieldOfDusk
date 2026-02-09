@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JPanel;
 import main.tile.TileManager;
+import object.SuperObject;
 
 public class GamePanel extends JPanel implements Runnable {
     // screen settings
@@ -28,24 +29,23 @@ public class GamePanel extends JPanel implements Runnable {
     
     public int worldWidth = tileSize * maxWorldCol;           
     public int worldHeight = tileSize * maxWorldRow;
-
-    //FPS
+    
     int FPS = 60;
-    
-    // Referencia al TileManager
+   
     public TileManager tileM;
-    
-    Thread gameThread;
-    
-    //sobre la coalision
-    public CollisionChecker cChecker = new CollisionChecker(this);
-
     KeyHandler keyH = new KeyHandler();
+    Thread gameThread;
+    public CollisionChecker cChecker = new CollisionChecker(this);
+    public AssetSetter aSetter = new AssetSetter(this);
     public Player player = new Player(this, keyH);
+    public SuperObject obj[] = new SuperObject[10]; //cantidad de objetos para mostrar al mismo tiempo en pantalla
+    
     
     int playerposX;
 	int playerSpeed;
 	int playerposY;
+	
+	
     
     public GamePanel() {
       
@@ -58,6 +58,10 @@ public class GamePanel extends JPanel implements Runnable {
             tileM = new TileManager(this);
     }
    
+    public void setupGame() {
+    	aSetter.setObject();
+    }
+    
     public void startGameThread() {
         gameThread = new Thread(this);
         gameThread.start();
@@ -118,9 +122,16 @@ public class GamePanel extends JPanel implements Runnable {
     @Override
     public void paintComponent(java.awt.Graphics g) {
         super.paintComponent(g);
-     
         java.awt.Graphics2D g2 = (java.awt.Graphics2D)g;
+      //tiles
         tileM.draw(g2); //esto son como capas, primero se dibujan los tiles
+      //objects
+        for(int i =0; i < obj.length;i++){
+        	if (obj[i] !=null) {
+        		obj[i].draw(g2, this);
+        	}
+        }
+      //player
         player.draw(g2);
         
         g2.dispose();
