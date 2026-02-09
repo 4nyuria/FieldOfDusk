@@ -118,8 +118,29 @@ public class TileManager {
     	
     	try {
     		tile[index] = new Tile();
-    		tile[index].image = ImageIO.read(getClass().getResourceAsStream("/Res/tiles/"+ imageName));
-    	//	tile[index].image = uTool.scaleImage(tile[index].image, gp.tileSize, gp.tileSize); 
+    			// Intentar cargar con el nombre tal cual
+    			java.io.InputStream is = getClass().getResourceAsStream("/Res/tiles/"+ imageName);
+    			// Si no se encuentra, intentar con padding a 3 dígitos (p. ej. 1.png -> 001.png)
+    			if (is == null) {
+    				try {
+    					String ext = imageName.contains(".") ? imageName.substring(imageName.lastIndexOf('.')) : "";
+    					String nameNoExt = imageName.contains(".") ? imageName.substring(0, imageName.lastIndexOf('.')) : imageName;
+    					int num = Integer.parseInt(nameNoExt);
+    					String padded = String.format("%03d", num) + ext;
+    					is = getClass().getResourceAsStream("/Res/tiles/" + padded);
+    					if (is != null) imageName = padded; // actualizar nombre para mensajes
+    				} catch (NumberFormatException ex) {
+    					// no es un número, no intentar el padded
+    				}
+    			}
+
+    			if (is == null) {
+    				System.err.println("Imagen no encontrada en recursos para tile " + index + ": " + imageName);
+    			} else {
+    				tile[index].image = ImageIO.read(is);
+    				try { is.close(); } catch (IOException ignore) {}
+    			}
+    			tile[index].collision = collision;
     		tile[index].collision = collision;
     		
     		if (tile[index].image == null) {
