@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-
 import javax.imageio.ImageIO;
 import main.GamePanel;
 
@@ -24,7 +23,7 @@ public class TileManager {
     public TileManager(GamePanel gp) {
         this.gp = gp;
         // Para leer TILE DATA FILE - a esto debo cambiarle la ruta después para que quede ordenado
-        InputStream is = getClass().getResourceAsStream("/maps/tiledata.txt"); 
+        InputStream is = getClass().getResourceAsStream("/Res/maps/tiledata.txt"); 
         BufferedReader br = new BufferedReader(new InputStreamReader(is)); 
         
         //para sacar el nombre de las tiles y las coalisiones desde el archivo
@@ -47,7 +46,7 @@ public class TileManager {
          */
         getTileImage();
         // para maxWorldCol & Row
-        is = getClass ().getResourceAsStream("/maps/mapexample.txt");
+        is = getClass ().getResourceAsStream("/Res/maps/mapexample.txt");
         br = new BufferedReader (new InputStreamReader(is));
         
         try {
@@ -55,7 +54,13 @@ public class TileManager {
         	String maxTile[] = line2.split(" ");
         	
         	gp.maxWorldCol = maxTile.length;
-        	gp.maxWorldRow = maxTile.length;
+        	
+        	// Contar el número de filas
+        	int rowCount = 1; // ya leímos una línea
+        	while(br.readLine() != null) {
+        		rowCount++;
+        	}
+        	gp.maxWorldRow = rowCount;
             mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
         	
             br.close();
@@ -64,7 +69,7 @@ public class TileManager {
         	System.out.println("Exception!*");
         }
         
-        loadMap("/maps/mapexample.txt",0);
+        loadMap("/Res/maps/mapexample.txt",0);
 
        
        /*Esto leía el mapa al inicio
@@ -87,6 +92,7 @@ public class TileManager {
     		}
     		setup(i, fileName, collision);
     	}
+    	System.out.println("Tiles cargados: " + fileNames.size());
     }
 /*
  Esto es para cargar las tile 1x1, pero es preferible usarla al inicio como
@@ -108,15 +114,20 @@ public class TileManager {
 
 */    	
     public void setup(int index, String imageName, boolean collision) {
-    	UtilityTool uTool = new UtilityTool(); 
+    	//UtilityTool uTool = new UtilityTool(); 
     	
     	try {
     		tile[index] = new Tile();
-    		tile[index].image = ImageIO.read(getClass().getResourceAsStream("/Res.tiles/"+ imageName));
-    		tile[index].image = uTool.scaleImage(tile[index].image, gp.tileSize, gp.tileSize); 
+    		tile[index].image = ImageIO.read(getClass().getResourceAsStream("/Res/tiles/"+ imageName));
+    	//	tile[index].image = uTool.scaleImage(tile[index].image, gp.tileSize, gp.tileSize); 
     		tile[index].collision = collision;
     		
+    		if (tile[index].image == null) {
+    			System.err.println("Error: Imagen nula para tile " + index + ": " + imageName);
+    		}
+    		
     		}catch(IOException e) {
+    			System.err.println("Error cargando tile " + index + ": " + imageName);
     			e.printStackTrace();
     		}
     }
@@ -133,26 +144,22 @@ public class TileManager {
             return;
             }
 
-            int col = 0;
             int row = 0;
             
-            while (col < gp.maxWorldCol && row < gp.maxWorldRow) {
+            while (row < gp.maxWorldRow) {
                 String line = br.readLine();
                 if (line == null) break;
                
-                while (col < gp.maxWorldCol) {
-                  
-                    String numbers[] = line.split(" ");
-                  
+                String numbers[] = line.split(" ");
+                
+                for (int col = 0; col < gp.maxWorldCol && col < numbers.length; col++) {
                     int num = Integer.parseInt(numbers[col]);
                     mapTileNum[col][row] = num;
-                    col++;
-                } 
-                if (col == gp.maxWorldCol) {
-                    col = 0;
-                    row++;
                 }
+                row++;
             } 
+            
+            System.out.println("Mapa cargado: " + gp.maxWorldCol + "x" + gp.maxWorldRow);
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -182,21 +189,25 @@ public class TileManager {
          int screenX = worldX - gp.player.worldX + gp.player.screenX;
          int screenY = worldY - gp.player.worldY + gp.player.screenY;   
          
-         if (worldX + gp.tileSize > gp.player.worldX - gp.player.screenX - gp.tileSize &&
-             worldX - gp.tileSize < gp.player.worldX + gp.player.screenX + gp.tileSize &&
-             worldY + gp.tileSize > gp.player.worldY - gp.player.screenY - gp.tileSize &&
-             worldY - gp.tileSize < gp.player.worldY + gp.player.screenY + gp.tileSize) {
-
-                 g2.drawImage( tile[tileNum].image, screenX, screenY, gp.tileSize, gp.tileSize, null);
-
+         // Dibujar si está dentro de la pantalla (simplificado)
+         if (screenX > -gp.tileSize && screenX < gp.screenWidth &&
+             screenY > -gp.tileSize && screenY < gp.screenHeight) {
+             
+             if (tile[tileNum] != null && tile[tileNum].image != null) {
+                 g2.drawImage(tile[tileNum].image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+             } else {
+                 // Debug: dibujar un rectángulo si la imagen es nula
+                 g2.setColor(java.awt.Color.CYAN);
+                 g2.fillRect(screenX, screenY, gp.tileSize, gp.tileSize);
              }
+         }
 
-           worldCol++;
+         worldCol++;
 
-           if (worldCol == gp.maxWorldCol) {
-               worldCol = 0;
-               worldRow++;
-           }
+         if (worldCol == gp.maxWorldCol) {
+             worldCol = 0;
+             worldRow++;
+         }
        }
     }
 

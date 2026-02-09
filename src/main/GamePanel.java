@@ -1,10 +1,10 @@
 package main;
 
-import main.tile.TileManager;
 import entity.Player;
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JPanel;
+import main.tile.TileManager;
 
 public class GamePanel extends JPanel implements Runnable {
     // screen settings
@@ -26,14 +26,14 @@ public class GamePanel extends JPanel implements Runnable {
     public int maxWorldCol;
     public int maxWorldRow;
     
-    public final int worldWidth = tileSize * maxWorldCol;           
-    public final int worldHeight = tileSize * maxWorldRow;
+    public int worldWidth = tileSize * maxWorldCol;           
+    public int worldHeight = tileSize * maxWorldRow;
 
     //FPS
     int FPS = 60;
     
     // Referencia al TileManager
-    public TileManager tileM = new TileManager(this);
+    public TileManager tileM;
     
     Thread gameThread;
     
@@ -54,6 +54,8 @@ public class GamePanel extends JPanel implements Runnable {
          this.setDoubleBuffered(true);
          this.addKeyListener(keyH);
          this.setFocusable(true); // to receive key input
+
+            tileM = new TileManager(this);
     }
    
     public void startGameThread() {

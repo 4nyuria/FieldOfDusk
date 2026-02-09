@@ -35,7 +35,10 @@ public class CollisionChecker {
         case "up" -> {
             topRow = (topY - entity.speed) / gp.tileSize;
             if (topRow < 0) { entity.collisionOn = true; return; }
-
+            
+            leftCol = clamp(leftCol, 0, gp.maxWorldCol - 1);
+            rightCol = clamp(rightCol, 0, gp.maxWorldCol - 1);
+            
             tileNum1 = gp.tileM.mapTileNum[leftCol][topRow];
             tileNum2 = gp.tileM.mapTileNum[rightCol][topRow];
         }
@@ -43,6 +46,9 @@ public class CollisionChecker {
         case "down" -> {
             bottomRow = (bottomY + entity.speed) / gp.tileSize;
             if (bottomRow >= gp.maxWorldRow) { entity.collisionOn = true; return; }
+            
+            leftCol = clamp(leftCol, 0, gp.maxWorldCol - 1);
+            rightCol = clamp(rightCol, 0, gp.maxWorldCol - 1);
 
             tileNum1 = gp.tileM.mapTileNum[leftCol][bottomRow];
             tileNum2 = gp.tileM.mapTileNum[rightCol][bottomRow];
@@ -51,6 +57,10 @@ public class CollisionChecker {
         case "left" -> {
             leftCol = (leftX - entity.speed) / gp.tileSize;
             if (leftCol < 0) { entity.collisionOn = true; return; }
+            
+            leftCol = clamp(leftCol, 0, gp.maxWorldCol - 1);
+            topRow = clamp(topRow, 0, gp.maxWorldRow - 1);
+            bottomRow = clamp(bottomRow, 0, gp.maxWorldRow - 1);
 
             tileNum1 = gp.tileM.mapTileNum[leftCol][topRow];
             tileNum2 = gp.tileM.mapTileNum[leftCol][bottomRow];
@@ -59,6 +69,10 @@ public class CollisionChecker {
         case "right" -> {
             rightCol = (rightX + entity.speed) / gp.tileSize;
             if (rightCol >= gp.maxWorldCol) { entity.collisionOn = true; return; }
+            
+            rightCol = clamp(rightCol, 0, gp.maxWorldCol - 1);
+            topRow = clamp(topRow, 0, gp.maxWorldRow - 1);
+            bottomRow = clamp(bottomRow, 0, gp.maxWorldRow - 1);
 
             tileNum1 = gp.tileM.mapTileNum[rightCol][topRow];
             tileNum2 = gp.tileM.mapTileNum[rightCol][bottomRow];
