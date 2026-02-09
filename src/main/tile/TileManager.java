@@ -64,7 +64,7 @@ public class TileManager {
         	System.out.println("Exception!*");
         }
         
-        loadMap("/mpas/sample.txt",0);
+        loadMap("/maps/sample.txt",0);
 
        
        /*Esto leía el mapa al inicio
@@ -108,7 +108,7 @@ public class TileManager {
 
 */    	
     public void setup(int index, String imageName, boolean collision) {
-    	UtilityTool uTool = new UtilityTool();
+    	//UtilityTool uTool = new UtilityTool(); en el capitulo 47 sacar el comentado
     	
     	try {
     		tile[index] = new Tile();
@@ -121,7 +121,7 @@ public class TileManager {
     		}
     }
     @SuppressWarnings({"CallToPrintStackTrace", "UseSpecificCatch"})
-    public void loadMap(String filePath) {
+    public void loadMap(String filePath, int map) {
         BufferedReader br = null;
         try {
             // Aca cargaríamos el mapa desde un archivo de texto o similar
