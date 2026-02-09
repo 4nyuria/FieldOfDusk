@@ -47,7 +47,19 @@ public class TileManager {
          */
         getTileImage();
         // para maxWorldCol & Row
+        is = getClass ().getResourceAsStream("/maps/sample.txt");
+        br = new BufferedReader (new InputStreamReader(is));
         
+        try {
+        	String line2 = br.readLine();
+        	String maxTile[] = line2.split(" ");
+        	
+        	gp.maxWorldCol = maxTile.length;
+        	
+        	
+        }catch(IOException e) {
+        	System.out.println("Exception!*");
+        }
         
         mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
        
@@ -67,7 +79,7 @@ public class TileManager {
     		else {
     			collision = false;
     		}
-    		setup(i, fileName, collsion);
+    		setup(i, fileName, collision);
     	}
     }
 /*
